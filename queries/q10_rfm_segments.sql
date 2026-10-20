@@ -1,0 +1,4 @@
+-- Recency, frequency and monetary scores per known customer, as of 2026-08-31.
+-- Columns: customer_key, recency_days, frequency, monetary, r_score, f_score, m_score
+-- Revenue excludes cancelled orders.
+-- TODO: one SELECT statement (no trailing statements after it)

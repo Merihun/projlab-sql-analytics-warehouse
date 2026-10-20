@@ -1,0 +1,4 @@
+-- Monthly revenue with the previous month and month-over-month growth.
+-- Columns: year_month, revenue, prev_revenue, mom_growth_pct
+-- Revenue excludes cancelled orders.
+-- TODO: one SELECT statement (no trailing statements after it)

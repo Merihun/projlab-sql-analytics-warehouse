@@ -1,0 +1,9 @@
+[sqlfluff]
+dialect = duckdb
+# Rules that catch real problems: inconsistent keyword case, DISTINCT with GROUP BY, a bare UNION,
+# CTEs nobody reads, unknown or ambiguous column references, repeated and unused table aliases.
+# Layout is yours to choose. Add rules here when you want a stricter style.
+rules = CP01, AM01, AM02, ST03, RF01, AL04, AL05
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper

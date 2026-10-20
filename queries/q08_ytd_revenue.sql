@@ -1,0 +1,4 @@
+-- Monthly revenue with a year-to-date running total that restarts each calendar year.
+-- Columns: year_month, revenue, ytd_revenue
+-- Revenue excludes cancelled orders.
+-- TODO: one SELECT statement (no trailing statements after it)

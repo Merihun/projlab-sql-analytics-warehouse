@@ -1,0 +1,4 @@
+-- Step "Load customer and product dimensions".
+-- Each load starts by emptying its table, so running this file twice gives the same result.
+-- TODO wh.dim_customer: DELETE, the unknown member (key -1), then every stg.customers row
+-- TODO wh.dim_product:  the same three statements from stg.products

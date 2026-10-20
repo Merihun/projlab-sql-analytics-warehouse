@@ -1,0 +1,66 @@
+# ProjLab: Data Engineering Basic
+# Used by the dev container (.devcontainer/devcontainer.json) AND by plain `docker compose up`.
+# Credentials are local-only development defaults; override them in .env (never commit .env).
+name: projlab-data-engineering-basic
+
+services:
+  workspace:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    init: true
+    user: vscode
+    working_dir: /workspace
+    command: >-
+      jupyter lab --ip=0.0.0.0 --port=8888 --no-browser
+      --ServerApp.root_dir=/workspace --ServerApp.allow_remote_access=True
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      JUPYTER_TOKEN: ${JUPYTER_TOKEN:-projlab}
+      PYTHONPATH: /workspace/src
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: ${POSTGRES_USER:-projlab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-projlab}
+      POSTGRES_DB: ${POSTGRES_DB:-projlab}
+    volumes:
+      - .:/workspace:cached
+    ports:
+      - "127.0.0.1:${JUPYTER_PORT:-8888}:8888"
+    networks: [lab]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8888/api')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  postgres:
+    image: postgres:16.15-bookworm
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-projlab}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-projlab}
+      POSTGRES_DB: ${POSTGRES_DB:-projlab}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+    networks: [lab]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    # Not published to your machine. To use a desktop SQL client, uncomment (binds to localhost only):
+    # ports:
+    #   - "127.0.0.1:${POSTGRES_HOST_PORT:-5432}:5432"
+
+volumes:
+  postgres-data:
+
+networks:
+  lab:

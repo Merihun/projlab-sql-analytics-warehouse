@@ -1,0 +1,4 @@
+-- Orders, revenue and average order value by month.
+-- Columns: year_month, orders, revenue, avg_order_value
+-- Revenue excludes cancelled orders.
+-- TODO: one SELECT statement (no trailing statements after it)

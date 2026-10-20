@@ -1,0 +1,7 @@
+# Pinned to the versions ProjLabs' own checks run with, so a result on your computer matches a result there.
+jupyterlab==4.6.4
+pandas==3.0.6
+psycopg[binary]==3.3.6
+pytest==9.1.1
+duckdb==1.5.6
+sqlfluff==4.3.0

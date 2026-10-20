@@ -1,0 +1,4 @@
+-- Revenue by customer country; customers with no country as 'ZZ'.
+-- Columns: country_code, revenue
+-- Revenue excludes cancelled orders.
+-- TODO: one SELECT statement (no trailing statements after it)

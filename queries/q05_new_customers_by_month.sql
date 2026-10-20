@@ -1,0 +1,4 @@
+-- New customers by the month of their first order.
+-- Columns: year_month, new_customers
+-- Count only non-cancelled orders and known customers (customer_key <> -1).
+-- TODO: one SELECT statement (no trailing statements after it)

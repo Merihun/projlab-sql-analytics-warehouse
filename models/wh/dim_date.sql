@@ -1,0 +1,3 @@
+-- Step "Generate the date dimension".
+-- TODO: CREATE OR REPLACE TABLE wh.dim_date AS ... one row per day from 2024-09-01 to 2026-08-31,
+--       plus the unknown member (date_key = -1).

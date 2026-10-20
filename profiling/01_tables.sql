@@ -1,0 +1,9 @@
+-- Step "Count rows and test primary keys".
+-- Goal: profile.tables(table_name, row_count, distinct_pk, pk_is_unique), one row per raw table.
+-- Run it with:  python -m fernhill_shop run profiling/01_tables.sql
+--
+-- First, confirm you can see the six tables (run this line on its own):
+--   python -m fernhill_shop query "SELECT table_name FROM information_schema.tables WHERE table_schema = 'raw'"
+--
+-- TODO: CREATE SCHEMA IF NOT EXISTS profile;
+-- TODO: CREATE OR REPLACE TABLE profile.tables AS ... (one SELECT per table, stacked with UNION ALL)

@@ -1,0 +1,14 @@
+-- Step "Load fact_order_line at the declared grain".
+-- TODO: DELETE FROM wh.fact_order_line; then INSERT one row per order line with LEFT JOINs to
+--       stg.orders, wh.dim_customer, wh.dim_product and wh.dim_date, mapping failed lookups to -1.
+
+-- Verification queries. Run each one after loading:
+--   python -m fernhill_shop query "<the query>"
+--
+-- 1. Duplicate order lines (expect no rows):
+--    SELECT order_line_id FROM wh.fact_order_line GROUP BY 1 HAVING COUNT(*) > 1
+-- 2. Fact rows against source rows (expect two equal numbers):
+--    SELECT (SELECT COUNT(*) FROM wh.fact_order_line), (SELECT COUNT(*) FROM raw.order_lines)
+-- 3. Revenue against the source (expect a difference under 0.01):
+--    SELECT abs((SELECT SUM(net_amount) FROM wh.fact_order_line)
+--             - (SELECT SUM(quantity * unit_price - discount_amount) FROM raw.order_lines))

@@ -1,0 +1,4 @@
+-- Revenue by month and channel.
+-- Columns: year_month, channel, revenue
+-- Revenue excludes cancelled orders.
+-- TODO: one SELECT statement (no trailing statements after it)
